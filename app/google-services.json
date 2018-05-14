@@ -8,6 +8,50 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:948655078679:android:e1ee61e256773eb3",
+        "android_client_info": {
+          "package_name": "com.example.android.camera2basic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "948655078679-mda34hs6algo1nekin1u69v6jnae87dq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.camera2basic",
+            "certificate_hash": "36a155889435b9499a0b97fd8e85a3bb840d5e16"
+          }
+        },
+        {
+          "client_id": "948655078679-9a3pn01sjfoi7lcfbbgq28q85t6t786i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBki-tToritqrkk0_ZjwukWTk8_-QWXKo0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "948655078679-9a3pn01sjfoi7lcfbbgq28q85t6t786i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:948655078679:android:9f30892d2780bd14",
         "android_client_info": {
           "package_name": "io.github.the_dagger.mlkit"
