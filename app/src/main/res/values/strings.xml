@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MlKit</string>
+    <string name="detected_items">Detected Items</string>
 </resources>

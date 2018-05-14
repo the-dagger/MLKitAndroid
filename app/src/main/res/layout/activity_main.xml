@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextureView
-        android:id="@+id/texture_view"
+    <com.wonderkiln.camerakit.CameraView
+        android:id="@+id/camera"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_take_photo"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="24dp"
-        android:src="@drawable/ic_camera"
-        app:backgroundTint="@color/colorPrimary" />
+    <include
+        android:id="@+id/bottomLayout"
+        layout="@layout/layout_bottom_sheet" />
 
-</RelativeLayout>
+    <com.github.jorgecastilloprz.FABProgressCircle
+        android:id="@+id/fabProgressCircle"
+        android:layout_width="wrap_content"
+        app:layout_anchor="@id/bottomLayout"
+        app:layout_anchorGravity="end"
+        app:arcColor="@color/colorAccent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_take_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_camera"
+            app:rippleColor="@color/colorAccent"
+            app:backgroundTint="@color/colorPrimary"
+            app:fabSize="normal" />
+
+    </com.github.jorgecastilloprz.FABProgressCircle>
+</android.support.design.widget.CoordinatorLayout>
