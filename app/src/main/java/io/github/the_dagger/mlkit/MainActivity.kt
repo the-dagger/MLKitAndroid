@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             fabProgressCircle.show()
             cameraView.captureImage { cameraKitImage ->
                 // Get the Bitmap from the captured shot
-                getLabelsFromClod(cameraKitImage.bitmap)
+                getLabelsFromDevice(cameraKitImage.bitmap)
                 runOnUiThread {
                     showPreview()
                     imagePreview.setImageBitmap(cameraKitImage.bitmap)
