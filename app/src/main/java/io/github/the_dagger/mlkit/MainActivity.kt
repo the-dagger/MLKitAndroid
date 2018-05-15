@@ -2,46 +2,35 @@ package io.github.the_dagger.mlkit
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.wonderkiln.camerakit.CameraKitImage
 import android.support.design.widget.BottomSheetBehavior
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
-import com.google.firebase.ml.vision.label.FirebaseVisionLabel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_bottom_sheet.*
 import android.view.View
-import android.R.attr.bitmap
-import com.google.firebase.ml.vision.cloud.label.FirebaseVisionCloudLabelDetector
-import android.support.annotation.NonNull
-import com.google.android.gms.tasks.OnFailureListener
-import com.google.firebase.ml.vision.cloud.label.FirebaseVisionCloudLabel
-import com.google.android.gms.tasks.OnSuccessListener
-import com.google.android.gms.tasks.Task
+import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity() {
 
     private var itemsList: ArrayList<Any> = ArrayList()
-
-    private val itemsAdapter: ItemsAdapter by lazy {
-        ItemsAdapter(itemsList)
-    }
+    private lateinit var itemAdapter: ItemAdapter
 
     private lateinit var sheetBehavior: BottomSheetBehavior<*>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val floatingActionButton = findViewById<FloatingActionButton>(R.id.fab_take_photo)
-
         rvLabel.layoutManager = LinearLayoutManager(this)
-        rvLabel.adapter = itemsAdapter
+        btnRetry.setOnClickListener {
+            if (cameraView.visibility == View.VISIBLE) showPreview() else hidePreview()
+        }
 
         sheetBehavior = BottomSheetBehavior.from(bottomLayout)
-
         sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {}
 
@@ -50,10 +39,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        floatingActionButton.setOnClickListener {
+        fab_take_photo.setOnClickListener {
             fabProgressCircle.show()
-            camera.captureImage { cameraKitImage ->
+            cameraView.captureImage { cameraKitImage ->
                 getLabelsFromClod(captureImage(cameraKitImage))
+                runOnUiThread {
+                    showPreview()
+                    imagePreview.setImageBitmap(cameraKitImage.bitmap)
+                }
             }
         }
     }
@@ -67,12 +60,14 @@ class MainActivity : AppCompatActivity() {
                     // Task completed successfully
                     fabProgressCircle.hide()
                     itemsList.addAll(it)
-                    itemsAdapter.notifyDataSetChanged()
+                    itemAdapter = ItemAdapter(itemsList,false)
+                    rvLabel.adapter = itemAdapter
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
                 .addOnFailureListener {
                     // Task failed with an exception
                     fabProgressCircle.hide()
+                    Toast.makeText(baseContext,"Sorry, something went wrong!",Toast.LENGTH_SHORT).show()
                 }
     }
 
@@ -81,30 +76,41 @@ class MainActivity : AppCompatActivity() {
         val detector = FirebaseVision.getInstance()
                 .visionCloudLabelDetector
         itemsList.clear()
-        val result = detector.detectInImage(image)
+        detector.detectInImage(image)
                 .addOnSuccessListener {
                     // Task completed successfully
                     fabProgressCircle.hide()
                     itemsList.addAll(it)
-                    itemsAdapter.notifyDataSetChanged()
+                    itemAdapter = ItemAdapter(itemsList,true)
+                    rvLabel.adapter = itemAdapter
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                 }
                 .addOnFailureListener {
                     // Task failed with an exception
                     fabProgressCircle.hide()
+                    Toast.makeText(baseContext,"Sorry, something went wrong!",Toast.LENGTH_SHORT).show()
                 }
     }
 
     override fun onResume() {
         super.onResume()
-        camera.start()
+        cameraView.start()
     }
 
     override fun onPause() {
-        camera.stop()
+        cameraView.stop()
         super.onPause()
     }
 
+    private fun showPreview() {
+        framePreview.visibility = View.VISIBLE
+        cameraView.visibility = View.GONE
+    }
+
+    private fun hidePreview() {
+        framePreview.visibility = View.GONE
+        cameraView.visibility = View.VISIBLE
+    }
 
     private fun captureImage(cameraKitImage: CameraKitImage): Bitmap {
         return cameraKitImage.bitmap

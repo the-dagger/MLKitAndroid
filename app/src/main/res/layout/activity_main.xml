@@ -5,10 +5,32 @@
     android:layout_height="match_parent">
 
     <com.wonderkiln.camerakit.CameraView
-        android:id="@+id/camera"
+        android:id="@+id/cameraView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true" />
+
+    <FrameLayout
+        android:visibility="gone"
+        android:id="@+id/framePreview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/imagePreview"/>
+
+        <ImageButton
+            android:layout_gravity="center"
+            android:background="@null"
+            android:scaleType="centerCrop"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:id="@+id/btnRetry"
+            android:src="@drawable/ic_refresh"/>
+
+    </FrameLayout>
 
     <include
         android:id="@+id/bottomLayout"
@@ -16,6 +38,7 @@
 
     <com.github.jorgecastilloprz.FABProgressCircle
         android:id="@+id/fabProgressCircle"
+        app:arcWidth="4dp"
         android:layout_width="wrap_content"
         app:layout_anchor="@id/bottomLayout"
         app:layout_anchorGravity="end"
