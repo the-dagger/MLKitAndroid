@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_bottom_sheet.*
 import android.view.View
 import android.widget.Toast
+import io.github.the_dagger.mlkit.R.id.*
 
 
 class MainActivity : AppCompatActivity() {
