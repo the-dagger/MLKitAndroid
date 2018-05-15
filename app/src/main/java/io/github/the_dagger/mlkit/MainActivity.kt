@@ -2,18 +2,15 @@ package io.github.the_dagger.mlkit
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import com.google.firebase.ml.vision.FirebaseVision
-import com.google.firebase.ml.vision.common.FirebaseVisionImage
-import com.wonderkiln.camerakit.CameraKitImage
 import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_bottom_sheet.*
 import android.view.View
 import android.widget.Toast
-import io.github.the_dagger.mlkit.R.id.*
+import com.google.firebase.ml.vision.FirebaseVision
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.layout_bottom_sheet.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,7 +40,8 @@ class MainActivity : AppCompatActivity() {
         fab_take_photo.setOnClickListener {
             fabProgressCircle.show()
             cameraView.captureImage { cameraKitImage ->
-                getLabelsFromClod(captureImage(cameraKitImage))
+                // Get the Bitmap from the captured shot
+                getLabelsFromClod(cameraKitImage.bitmap)
                 runOnUiThread {
                     showPreview()
                     imagePreview.setImageBitmap(cameraKitImage.bitmap)
@@ -63,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                     itemsList.addAll(it)
                     itemAdapter = ItemAdapter(itemsList,false)
                     rvLabel.adapter = itemAdapter
-                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
                 .addOnFailureListener {
                     // Task failed with an exception
@@ -84,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     itemsList.addAll(it)
                     itemAdapter = ItemAdapter(itemsList,true)
                     rvLabel.adapter = itemAdapter
-                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                    sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
                 .addOnFailureListener {
                     // Task failed with an exception
@@ -111,10 +109,6 @@ class MainActivity : AppCompatActivity() {
     private fun hidePreview() {
         framePreview.visibility = View.GONE
         cameraView.visibility = View.VISIBLE
-    }
-
-    private fun captureImage(cameraKitImage: CameraKitImage): Bitmap {
-        return cameraKitImage.bitmap
     }
 
 }
