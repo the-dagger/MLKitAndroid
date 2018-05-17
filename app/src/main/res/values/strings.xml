@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">MlKit</string>
     <string name="detected_items">Detected Items</string>
+    <string name="desc_text">Recognize and extract text from images</string>
+    <string name="desc_face">Detect faces and facial landmarks</string>
+    <string name="desc_barcode">Scan and process barcodes</string>
+    <string name="desc_labelling">Identify objects, locations, activities, animal species, products, and more</string>
+    <string name="desc_landmark">Identify popular landmarks in an image</string>
+    <string name="title_text">Text recognition</string>
+    <string name="title_face">Face detection</string>
+    <string name="title_barcode">Barcode scanning</string>
+    <string name="title_labelling">Image labeling</string>
+    <string name="title_landmark">Landmark recognition</string>
 </resources>

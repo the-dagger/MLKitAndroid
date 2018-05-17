@@ -15,9 +15,10 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-        <activity android:name=".MainActivity"
-           android:theme="@style/AppThemeNoActionbar">
+        <activity
+            android:name=".ImageLabelActivity"
+            android:theme="@style/AppThemeNoActionbar"/>
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -13,10 +13,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_bottom_sheet.*
 
 
-class MainActivity : AppCompatActivity() {
+class ImageLabelActivity : AppCompatActivity() {
 
     private var itemsList: ArrayList<Any> = ArrayList()
-    private lateinit var itemAdapter: ItemAdapter
+    private lateinit var itemAdapter: ImageLabelAdapter
 
     private lateinit var sheetBehavior: BottomSheetBehavior<*>
 
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     // Task completed successfully
                     fabProgressCircle.hide()
                     itemsList.addAll(it)
-                    itemAdapter = ItemAdapter(itemsList,false)
+                    itemAdapter = ImageLabelAdapter(itemsList,false)
                     rvLabel.adapter = itemAdapter
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     // Task completed successfully
                     fabProgressCircle.hide()
                     itemsList.addAll(it)
-                    itemAdapter = ItemAdapter(itemsList,true)
+                    itemAdapter = ImageLabelAdapter(itemsList,true)
                     rvLabel.adapter = itemAdapter
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }

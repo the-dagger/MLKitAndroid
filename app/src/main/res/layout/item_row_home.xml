@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/cViewHome"
+    android:foreground="?attr/selectableItemBackground"
+    android:layout_margin="8dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="184dp"
+            android:id="@+id/iViewApi"/>
+
+        <TextView
+            android:padding="8dp"
+            android:id="@+id/tViewApiName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="8dp"
+            android:textSize="16sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tViewApiDesc"
+            android:fontFamily="@font/roboto_medium" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
