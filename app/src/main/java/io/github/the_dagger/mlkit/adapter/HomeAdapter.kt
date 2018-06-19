@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_row_home.view.*
 
 class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
 
-    lateinit var context: Context
+    private lateinit var context: Context
 
     class HomeHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
 
@@ -28,9 +28,9 @@ class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<Hom
             cViewHome.setOnClickListener {
                 when(currItem.id){
                     0 -> context.startActivity(Intent(context, ImageLabelActivity::class.java))
-                    1 -> context.startActivity(Intent(context, FaceDetectionActivity::class.java))
-                    2 -> Toast.makeText(context,"Work in Progress",Toast.LENGTH_SHORT).show()
-                    3 -> context.startActivity(Intent(context, CardScannerActivity::class.java))
+                    1 -> context.startActivity(Intent(context, CardScannerActivity::class.java))
+                    2 -> context.startActivity(Intent(context, FaceDetectionActivity::class.java))
+                    3 -> Toast.makeText(context,"Work in Progress",Toast.LENGTH_SHORT).show()
                     4 -> Toast.makeText(context,"Work in Progress",Toast.LENGTH_SHORT).show()
                 }
             }

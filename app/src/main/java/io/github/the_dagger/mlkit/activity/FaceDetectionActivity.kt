@@ -7,6 +7,8 @@ import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.face.FirebaseVisionFaceDetector
 import com.wonderkiln.camerakit.CameraKit
+import io.github.the_dagger.mlkit.R
+import io.github.the_dagger.mlkit.R.id.*
 import io.github.the_dagger.mlkit.activity.BaseCameraActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -15,6 +17,7 @@ class FaceDetectionActivity : BaseCameraActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         cameraView.facing = CameraKit.Constants.FACING_FRONT
+        setupBottomSheet(R.layout.layout_image_label)
     }
 
     private fun getFaceDetails(bitmap: Bitmap) {
