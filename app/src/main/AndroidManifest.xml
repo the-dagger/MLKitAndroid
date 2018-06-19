@@ -10,21 +10,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
-            android:name="com.google.firebase.ml.vision.DEPENDENCIES"
-            android:value="label" />
-        <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
         <activity
-            android:name=".ImageLabelActivity"
-            android:theme="@style/AppThemeNoActionbar"/>
-        <activity android:name=".HomeActivity">
+            android:name=".activity.CardScannerActivity"
+            android:theme="@style/AppThemeNoActionbar">
+            <meta-data
+                android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+                android:value="text" />
+        </activity>
+        <activity
+            android:name=".adapter.ImageLabelActivity"
+            android:theme="@style/AppThemeNoActionbar">
+            <meta-data
+                android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+                android:value="label" />
+        </activity>
+        <activity
+            android:name=".activity.FaceDetectionActivity"
+            android:theme="@style/AppThemeNoActionbar">
+            <meta-data
+                android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+                android:value="face" />
+        </activity>
+        <activity android:name=".activity.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

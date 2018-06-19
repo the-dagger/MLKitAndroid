@@ -11,39 +11,40 @@
         android:adjustViewBounds="true" />
 
     <FrameLayout
-        android:visibility="gone"
         android:id="@+id/framePreview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <ImageView
+            android:id="@+id/imagePreview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/imagePreview"/>
+            android:layout_height="match_parent" />
 
         <ImageButton
+            android:id="@+id/btnRetry"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center"
             android:background="@null"
             android:scaleType="centerCrop"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:id="@+id/btnRetry"
-            android:src="@drawable/ic_refresh"/>
+            android:src="@drawable/ic_refresh" />
 
     </FrameLayout>
 
-    <include
-        android:id="@+id/bottomLayout"
-        layout="@layout/layout_bottom_sheet" />
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:inflatedId="@+id/bottomLayout"
+        android:id="@+id/stubView" />
 
     <com.github.jorgecastilloprz.FABProgressCircle
         android:id="@+id/fabProgressCircle"
-        app:arcWidth="4dp"
         android:layout_width="wrap_content"
-        app:layout_anchor="@id/bottomLayout"
-        app:layout_anchorGravity="end"
+        android:layout_height="wrap_content"
         app:arcColor="@color/colorAccent"
-        android:layout_height="wrap_content">
+        app:arcWidth="4dp">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_take_photo"
@@ -53,9 +54,9 @@
             android:layout_centerHorizontal="true"
             android:layout_margin="16dp"
             android:src="@drawable/ic_camera"
-            app:rippleColor="@color/colorAccent"
             app:backgroundTint="@color/colorPrimary"
-            app:fabSize="normal" />
+            app:fabSize="normal"
+            app:rippleColor="@color/colorAccent" />
 
     </com.github.jorgecastilloprz.FABProgressCircle>
 </android.support.design.widget.CoordinatorLayout>

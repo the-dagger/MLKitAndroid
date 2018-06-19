@@ -1,53 +1,27 @@
-package io.github.the_dagger.mlkit
+package io.github.the_dagger.mlkit.adapter
 
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
-import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import io.github.the_dagger.mlkit.R
+import io.github.the_dagger.mlkit.activity.BaseCameraActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.layout_bottom_sheet.*
+import kotlinx.android.synthetic.main.layout_image_label.*
 
-
-class ImageLabelActivity : AppCompatActivity() {
+class ImageLabelActivity : BaseCameraActivity() {
 
     private var itemsList: ArrayList<Any> = ArrayList()
     private lateinit var itemAdapter: ImageLabelAdapter
 
-    private lateinit var sheetBehavior: BottomSheetBehavior<*>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setupBottomSheet(R.layout.layout_image_label)
         rvLabel.layoutManager = LinearLayoutManager(this)
-        btnRetry.setOnClickListener {
-            if (cameraView.visibility == View.VISIBLE) showPreview() else hidePreview()
-        }
-
-        sheetBehavior = BottomSheetBehavior.from(bottomLayout)
-        sheetBehavior.setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {}
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                fab_take_photo.animate().scaleX(1 - slideOffset).scaleY(1 - slideOffset).setDuration(0).start()
-            }
-        })
-
-        fab_take_photo.setOnClickListener {
-            fabProgressCircle.show()
-            cameraView.captureImage { cameraKitImage ->
-                // Get the Bitmap from the captured shot
-                getLabelsFromDevice(cameraKitImage.bitmap)
-                runOnUiThread {
-                    showPreview()
-                    imagePreview.setImageBitmap(cameraKitImage.bitmap)
-                }
-            }
-        }
     }
 
     private fun getLabelsFromDevice(bitmap: Bitmap) {
@@ -59,7 +33,7 @@ class ImageLabelActivity : AppCompatActivity() {
                     // Task completed successfully
                     fabProgressCircle.hide()
                     itemsList.addAll(it)
-                    itemAdapter = ImageLabelAdapter(itemsList,false)
+                    itemAdapter = ImageLabelAdapter(itemsList, false)
                     rvLabel.adapter = itemAdapter
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
@@ -80,7 +54,7 @@ class ImageLabelActivity : AppCompatActivity() {
                     // Task completed successfully
                     fabProgressCircle.hide()
                     itemsList.addAll(it)
-                    itemAdapter = ImageLabelAdapter(itemsList,true)
+                    itemAdapter = ImageLabelAdapter(itemsList, true)
                     rvLabel.adapter = itemAdapter
                     sheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
                 }
@@ -91,24 +65,16 @@ class ImageLabelActivity : AppCompatActivity() {
                 }
     }
 
-    override fun onResume() {
-        super.onResume()
-        cameraView.start()
-    }
-
-    override fun onPause() {
-        cameraView.stop()
-        super.onPause()
-    }
-
-    private fun showPreview() {
-        framePreview.visibility = View.VISIBLE
-        cameraView.visibility = View.GONE
-    }
-
-    private fun hidePreview() {
-        framePreview.visibility = View.GONE
-        cameraView.visibility = View.VISIBLE
+    override fun onClick(v: View?) {
+        fabProgressCircle.show()
+        cameraView.captureImage { cameraKitImage ->
+            // Get the Bitmap from the captured shot
+            getLabelsFromClod(cameraKitImage.bitmap)
+            runOnUiThread {
+                showPreview()
+                imagePreview.setImageBitmap(cameraKitImage.bitmap)
+            }
+        }
     }
 
 }

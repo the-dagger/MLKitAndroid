@@ -1,4 +1,4 @@
-package io.github.the_dagger.mlkit
+package io.github.the_dagger.mlkit.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import io.github.the_dagger.mlkit.PojoApi
+import io.github.the_dagger.mlkit.R
+import io.github.the_dagger.mlkit.activity.CardScannerActivity
+import io.github.the_dagger.mlkit.activity.FaceDetectionActivity
 import kotlinx.android.synthetic.main.item_row_home.view.*
 
 class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
@@ -23,10 +27,10 @@ class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<Hom
             iViewApi.setImageResource(currItem.imageId)
             cViewHome.setOnClickListener {
                 when(currItem.id){
-                    0 -> Toast.makeText(context,"Work in Progress",Toast.LENGTH_SHORT).show()
-                    1 -> Toast.makeText(context,"Work in Progress",Toast.LENGTH_SHORT).show()
+                    0 -> context.startActivity(Intent(context, ImageLabelActivity::class.java))
+                    1 -> context.startActivity(Intent(context, FaceDetectionActivity::class.java))
                     2 -> Toast.makeText(context,"Work in Progress",Toast.LENGTH_SHORT).show()
-                    3 -> context.startActivity(Intent(context,ImageLabelActivity::class.java))
+                    3 -> context.startActivity(Intent(context, CardScannerActivity::class.java))
                     4 -> Toast.makeText(context,"Work in Progress",Toast.LENGTH_SHORT).show()
                 }
             }

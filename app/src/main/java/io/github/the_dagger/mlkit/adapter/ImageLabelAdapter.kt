@@ -1,4 +1,4 @@
-package io.github.the_dagger.mlkit
+package io.github.the_dagger.mlkit.adapter
 
 import android.content.Context
 import android.support.v4.content.ContextCompat
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.google.firebase.ml.vision.cloud.label.FirebaseVisionCloudLabel
 import com.google.firebase.ml.vision.label.FirebaseVisionLabel
+import io.github.the_dagger.mlkit.R
 import kotlinx.android.synthetic.main.item_row.view.*
 
 class ImageLabelAdapter(private val firebaseVisionList: List<Any>, private val isCloud: Boolean) : RecyclerView.Adapter<ImageLabelAdapter.ItemHolder>() {
@@ -35,7 +36,6 @@ class ImageLabelAdapter(private val firebaseVisionList: List<Any>, private val i
         }
 
     }
-
 
     override fun onBindViewHolder(holder: ItemHolder, position: Int) {
         val currentItem = firebaseVisionList[position]
