@@ -32,7 +32,7 @@ abstract class BaseCameraActivity : AppCompatActivity(), View.OnClickListener {
         lparam.behavior = BottomSheetBehavior<View>()
         inflatedView.layoutParams = lparam
         sheetBehavior = BottomSheetBehavior.from(inflatedView)
-        sheetBehavior.peekHeight = 64
+        sheetBehavior.peekHeight = 224
         //Anchor the FAB to the end of inflated bottom sheet
         val lp = fabProgressCircle.layoutParams as CoordinatorLayout.LayoutParams
         lp.anchorId = inflatedView.id

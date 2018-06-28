@@ -6,7 +6,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
@@ -21,7 +20,7 @@
                 android:value="text" />
         </activity>
         <activity
-            android:name=".adapter.ImageLabelActivity"
+            android:name=".activity.ImageLabelActivity"
             android:theme="@style/AppThemeNoActionbar">
             <meta-data
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
@@ -39,6 +38,13 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.BarCodeReaderActivity"
+            android:theme="@style/AppThemeNoActionbar">
+            <meta-data
+                android:name="com.google.firebase.ml.vision.DEPENDENCIES"
+                android:value="barcode" />
         </activity>
     </application>
 </manifest>

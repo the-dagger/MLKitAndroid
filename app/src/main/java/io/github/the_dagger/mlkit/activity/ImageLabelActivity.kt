@@ -1,4 +1,4 @@
-package io.github.the_dagger.mlkit.adapter
+package io.github.the_dagger.mlkit.activity
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -9,7 +9,7 @@ import android.widget.Toast
 import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import io.github.the_dagger.mlkit.R
-import io.github.the_dagger.mlkit.activity.BaseCameraActivity
+import io.github.the_dagger.mlkit.adapter.ImageLabelAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_image_label.*
 
