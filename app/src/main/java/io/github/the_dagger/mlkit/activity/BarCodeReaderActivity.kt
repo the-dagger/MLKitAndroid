@@ -2,20 +2,15 @@ package io.github.the_dagger.mlkit.activity
 
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.View
-
-import io.github.the_dagger.mlkit.R
-import com.google.firebase.ml.vision.FirebaseVision
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector
-import kotlinx.android.synthetic.main.activity_main.*
-import android.R.attr.bitmap
 import android.support.design.widget.BottomSheetBehavior
-import android.util.Log
+import android.view.View
 import android.widget.Toast
+import com.google.firebase.ml.vision.FirebaseVision
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode
-import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions
-import io.github.the_dagger.mlkit.R.id.*
+import com.google.firebase.ml.vision.common.FirebaseVisionImage
+import io.github.the_dagger.mlkit.R
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_qr_code_reader.*
 
 
@@ -43,14 +38,13 @@ class BarCodeReaderActivity : BaseCameraActivity() {
                 .setBarcodeFormats(
                         FirebaseVisionBarcode.FORMAT_ALL_FORMATS)
                 .build()
-        val detector = FirebaseVision.getInstance().getVisionBarcodeDetector(options);
+        val detector = FirebaseVision.getInstance().getVisionBarcodeDetector(options)
         val image = FirebaseVisionImage.fromBitmap(bitmap)
         detector.detectInImage(image)
                 .addOnSuccessListener {
                     for (firebaseBarcode in it) {
 
                         codeData.text = firebaseBarcode.displayValue //Display contents inside the barcode
-                        sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
 
                         when (firebaseBarcode.valueType) {
                         //Handle the URL here
@@ -70,6 +64,7 @@ class BarCodeReaderActivity : BaseCameraActivity() {
                 }
                 .addOnCompleteListener {
                     fabProgressCircle.hide()
+                    sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
                 }
     }
 

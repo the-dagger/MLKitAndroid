@@ -11,4 +11,8 @@
     <string name="title_barcode">Barcode scanning</string>
     <string name="title_labelling">Image labeling</string>
     <string name="title_landmark">Landmark recognition</string>
+    <string name="location">Location</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="accuracy">Accuracy</string>
 </resources>

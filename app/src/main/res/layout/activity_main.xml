@@ -17,6 +17,7 @@
         android:visibility="gone">
 
         <ImageView
+            android:scaleType="centerCrop"
             android:id="@+id/imagePreview"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -33,11 +34,11 @@
     </FrameLayout>
 
     <ViewStub
+        android:id="@+id/stubView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         android:inflatedId="@+id/bottomLayout"
-        android:id="@+id/stubView" />
+        android:visibility="visible" />
 
     <com.github.jorgecastilloprz.FABProgressCircle
         android:id="@+id/fabProgressCircle"
