@@ -12,7 +12,7 @@ import io.github.the_dagger.mlkit.R
 import io.github.the_dagger.mlkit.activity.BarCodeReaderActivity
 import io.github.the_dagger.mlkit.activity.CardScannerActivity
 import io.github.the_dagger.mlkit.activity.ImageLabelActivity
-import io.github.the_dagger.mlkit.activity.LandscapeDetectorActivity
+import io.github.the_dagger.mlkit.activity.LandmarkDetectorActivity
 import kotlinx.android.synthetic.main.item_row_home.view.*
 
 class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<HomeAdapter.HomeHolder>() {
@@ -32,7 +32,7 @@ class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<Hom
                     0 -> context.startActivity(Intent(context, ImageLabelActivity::class.java))
                     1 -> context.startActivity(Intent(context, CardScannerActivity::class.java))
                     2 -> context.startActivity(Intent(context, BarCodeReaderActivity::class.java))
-                    3 -> context.startActivity(Intent(context, LandscapeDetectorActivity::class.java))
+                    3 -> context.startActivity(Intent(context, LandmarkDetectorActivity::class.java))
                     4 -> Toast.makeText(context, "Work in Progress", Toast.LENGTH_SHORT).show()
                 }
             }

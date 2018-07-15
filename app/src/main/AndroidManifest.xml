@@ -51,7 +51,7 @@
                 android:value="barcode" />
         </activity>
         <activity
-            android:name=".activity.LandscapeDetectorActivity"
+            android:name=".activity.LandmarkDetectorActivity"
             android:parentActivityName=".activity.HomeActivity">
 
         </activity>
