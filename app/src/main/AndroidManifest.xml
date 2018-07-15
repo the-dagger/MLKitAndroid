@@ -35,7 +35,9 @@
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="face" />
         </activity>
-        <activity android:name=".activity.HomeActivity">
+        <activity
+            android:name=".activity.HomeActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -48,7 +50,9 @@
                 android:name="com.google.firebase.ml.vision.DEPENDENCIES"
                 android:value="barcode" />
         </activity>
-        <activity android:name=".activity.LandscapeDetectorActivity">
+        <activity
+            android:name=".activity.LandscapeDetectorActivity"
+            android:parentActivityName=".activity.HomeActivity">
 
         </activity>
 

@@ -67,6 +67,7 @@ class LandscapeDetectorActivity : BaseCameraActivity() {
                     getLandscapeFromCloud(bitmap)
                     imagePreview.setImageBitmap(bitmap)
                     framePreview.visibility = View.VISIBLE
+                    btnRetry.visibility = View.GONE
                 }
 
                 override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
