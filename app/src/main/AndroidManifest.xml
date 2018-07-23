@@ -55,6 +55,9 @@
             android:parentActivityName=".activity.HomeActivity">
 
         </activity>
+        <activity android:name=".activity.SmartReplyActivity">
+
+        </activity>
 
     </application>
 </manifest>
