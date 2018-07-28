@@ -12,6 +12,8 @@ import com.google.firebase.ml.custom.FirebaseModelInputOutputOptions
 import kotlinx.android.synthetic.main.activity_smart_reply.*
 import com.google.firebase.ml.custom.FirebaseModelInputs
 import io.github.the_dagger.mlkit.R
+import io.github.the_dagger.mlkit.R.id.btnSend
+import io.github.the_dagger.mlkit.R.id.etText
 import java.nio.charset.Charset
 
 
@@ -36,8 +38,8 @@ class SmartReplyActivity : AppCompatActivity() {
 
         btnSend.setOnClickListener {
             val inputOutputOptions = FirebaseModelInputOutputOptions.Builder()
-                    .setInputFormat(0, FirebaseModelDataType.BYTE, intArrayOf(1, etText.text.length))
-                    .setOutputFormat(0, FirebaseModelDataType.BYTE, intArrayOf(1, 16))
+                    .setInputFormat(0, FirebaseModelDataType.BYTE, intArrayOf(etText.text.length))
+                    .setOutputFormat(0, FirebaseModelDataType.BYTE, intArrayOf(16))
                     .build()
 
 
