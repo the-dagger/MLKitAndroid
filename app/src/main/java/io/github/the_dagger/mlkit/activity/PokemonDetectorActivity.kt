@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_image_label.*
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
+import com.google.firebase.ml.custom.FirebaseModelManager
+import com.google.firebase.ml.custom.model.FirebaseCloudModelSource
 
 
 val pokeArray: Array<String> = arrayOf("abra", "aerodactyl", "alakazam", "arbok", "arcanine", "articuno", "beedrill", "bellsprout",
@@ -32,20 +34,19 @@ val pokeArray: Array<String> = arrayOf("abra", "aerodactyl", "alakazam", "arbok"
         "tangela", "tauros", "tentacool", "tentacruel", "vaporeon", "venomoth", "venonat", "venusaur", "victreebel",
         "vileplume", "voltorb", "vulpix", "wartortle", "weedle", "weepinbell", "weezing", "wigglytuff", "zapdos", "zubat")
 
-class SmartReplyActivity : BaseCameraActivity() {
+class PokemonDetectorActivity : BaseCameraActivity() {
     companion object {
         /** Dimensions of inputs.  */
-        const val IMAGE_MEAN = 128
-        private const val IMAGE_STD = 128.0f
         const val DIM_IMG_SIZE_X = 224
         const val DIM_IMG_SIZE_Y = 224
         const val DIM_BATCH_SIZE = 1
         const val DIM_PIXEL_SIZE = 3
+        const val IMAGE_MEAN = 128
+        private const val IMAGE_STD = 128.0f
     }
 
     private val intValues = IntArray(DIM_IMG_SIZE_X * DIM_IMG_SIZE_Y)
     private lateinit var imgData: ByteBuffer
-    private lateinit var fireBaseLocalModelSource: FirebaseLocalModelSource
     private lateinit var fireBaseInterpreter: FirebaseModelInterpreter
     private lateinit var inputOutputOptions: FirebaseModelInputOutputOptions
 
@@ -59,16 +60,28 @@ class SmartReplyActivity : BaseCameraActivity() {
         imgData.order(ByteOrder.nativeOrder())
 
         rvLabel.layoutManager = LinearLayoutManager(this)
-        //Load a local model using the FirebaseLocalModelSource Builder class
 
-        fireBaseLocalModelSource = FirebaseLocalModelSource.Builder("pokedex")
+//        Load a cloud model using the FirebaseCloudModelSource Builder class
+        val cloudSource = FirebaseCloudModelSource.Builder("pokedex")
+                .enableModelUpdates(true)
+                .build()
+
+        //Registering the cloud model loaded above with the ModelManager Singleton
+        FirebaseModelManager.getInstance().registerCloudModelSource(cloudSource)
+
+        //Load a local model using the FirebaseLocalModelSource Builder class
+        val fireBaseLocalModelSource = FirebaseLocalModelSource.Builder("pokedex")
                 .setAssetFilePath("pokedex.tflite")
                 .build()
 
         //Registering the model loaded above with the ModelManager Singleton
         FirebaseModelManager.getInstance().registerLocalModelSource(fireBaseLocalModelSource)
 
-        val firebaseModelOptions = FirebaseModelOptions.Builder().setLocalModelName("pokedex").build()
+        val firebaseModelOptions = FirebaseModelOptions.Builder()
+                .setLocalModelName("pokedex")
+                .setCloudModelName("pokedex")
+                .build()
+
         fireBaseInterpreter = FirebaseModelInterpreter.getInstance(firebaseModelOptions)!!
 
         inputOutputOptions = FirebaseModelInputOutputOptions.Builder()
@@ -91,25 +104,26 @@ class SmartReplyActivity : BaseCameraActivity() {
         }
     }
 
-    private fun convertBitmapToByteBuffer(bitmap: Bitmap?) {
+    private fun convertBitmapToByteBuffer(bitmap: Bitmap?) : ByteBuffer{
+        //Clear the Bytebuffer for a new image
         imgData.rewind()
         bitmap?.getPixels(intValues, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)
         // Convert the image to floating point.
         var pixel = 0
         for (i in 0 until DIM_IMG_SIZE_X) {
             for (j in 0 until DIM_IMG_SIZE_Y) {
-                val `val` = intValues[pixel++]
-                imgData.putFloat(((`val` shr 16 and 0xFF) - IMAGE_MEAN) / IMAGE_STD)
-                imgData.putFloat(((`val` shr 8 and 0xFF) - IMAGE_MEAN) / IMAGE_STD)
-                imgData.putFloat(((`val` and 0xFF) - IMAGE_MEAN) / IMAGE_STD)
+                val currPixel = intValues[pixel++]
+                imgData.putFloat(((currPixel shr 16 and 0xFF) - IMAGE_MEAN) / IMAGE_STD)
+                imgData.putFloat(((currPixel shr 8 and 0xFF) - IMAGE_MEAN) / IMAGE_STD)
+                imgData.putFloat(((currPixel and 0xFF) - IMAGE_MEAN) / IMAGE_STD)
             }
         }
+        return imgData
     }
 
     private fun getPokemonFromBitmap(bitmap: Bitmap?) {
-        convertBitmapToByteBuffer(bitmap)
         val inputs = FirebaseModelInputs.Builder()
-                .add(imgData) // add() as many input arrays as your model requires
+                .add(convertBitmapToByteBuffer(bitmap)) // add() as many input arrays as your model requires
                 .build()
 
         fireBaseInterpreter.run(inputs, inputOutputOptions)

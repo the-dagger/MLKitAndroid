@@ -34,7 +34,7 @@ class PokemonAdapter(private val pokeList: List<Pokemon>) : RecyclerView.Adapter
             else -> holder.itemView.itemAccuracy.setTextColor(ContextCompat.getColor(context, R.color.orange))
         }
         holder.itemView.itemName.text = currentItem.name
-        holder.itemView.itemAccuracy.text = "Accuracy : ${(currentItem.accuracy * 100).toInt()}%"
+        holder.itemView.itemAccuracy.text = "Probability : ${(currentItem.accuracy * 100).toInt()}%"
     }
 
 }

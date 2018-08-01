@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.item_row.view.*
 
 class ImageLabelAdapter(private val firebaseVisionList: List<Any>, private val isCloud: Boolean) : RecyclerView.Adapter<ImageLabelAdapter.ItemHolder>() {
     lateinit var context: Context
+
     inner class ItemHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
 
         fun bindCloud(currentItem: FirebaseVisionCloudLabel) {
@@ -22,7 +23,7 @@ class ImageLabelAdapter(private val firebaseVisionList: List<Any>, private val i
                 else -> itemView.itemAccuracy.setTextColor(ContextCompat.getColor(context, R.color.orange))
             }
             itemView.itemName.text = currentItem.label
-            itemView.itemAccuracy.text = "Accuracy : ${(currentItem.confidence * 100).toInt()}%"
+            itemView.itemAccuracy.text = "Probability : ${(currentItem.confidence * 100).toInt()}%"
         }
 
         fun bindDevice(currentItem: FirebaseVisionLabel) {
@@ -32,7 +33,7 @@ class ImageLabelAdapter(private val firebaseVisionList: List<Any>, private val i
                 else -> itemView.itemAccuracy.setTextColor(ContextCompat.getColor(context, R.color.orange))
             }
             itemView.itemName.text = currentItem.label
-            itemView.itemAccuracy.text = "Accuracy : ${(currentItem.confidence * 100).toInt()}%"
+            itemView.itemAccuracy.text = "Probability : ${(currentItem.confidence * 100).toInt()}%"
         }
 
     }

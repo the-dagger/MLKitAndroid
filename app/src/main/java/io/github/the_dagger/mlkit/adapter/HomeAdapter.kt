@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import io.github.the_dagger.mlkit.PojoApi
 import io.github.the_dagger.mlkit.R
 import io.github.the_dagger.mlkit.activity.*
@@ -30,7 +29,7 @@ class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<Hom
                     1 -> context.startActivity(Intent(context, CardScannerActivity::class.java))
                     2 -> context.startActivity(Intent(context, BarCodeReaderActivity::class.java))
                     3 -> context.startActivity(Intent(context, LandmarkDetectorActivity::class.java))
-                    4 -> context.startActivity(Intent(context, SmartReplyActivity::class.java))
+                    4 -> context.startActivity(Intent(context, PokemonDetectorActivity::class.java))
                 }
             }
         }

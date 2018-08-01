@@ -55,7 +55,7 @@
             android:parentActivityName=".activity.HomeActivity">
 
         </activity>
-        <activity android:name=".activity.SmartReplyActivity"
+        <activity android:name=".activity.PokemonDetectorActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
     </application>
