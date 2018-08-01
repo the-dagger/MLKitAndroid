@@ -7,7 +7,7 @@
     <string name="desc_labelling">Google Lens clone using MLKit</string>
     <string name="desc_landmark">Identify popular landmarks in an image</string>
     <string name="title_text">Text recognition</string>
-    <string name="model_custom">Custom Model</string>
+    <string name="title_custom">Custom Model</string>
     <string name="title_barcode">Barcode scanning</string>
     <string name="title_labelling">Image labeling</string>
     <string name="title_landmark">Landmark recognition</string>
