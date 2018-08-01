@@ -7,7 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.google.firebase.ml.custom.*
 import com.google.firebase.ml.custom.model.FirebaseLocalModelSource
-import io.github.the_dagger.mlkit.Pokemon
+import io.github.the_dagger.mlkit.model.Pokemon
 import io.github.the_dagger.mlkit.R
 import io.github.the_dagger.mlkit.adapter.PokemonAdapter
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,24 +17,23 @@ import java.nio.ByteOrder
 import com.google.firebase.ml.custom.FirebaseModelManager
 import com.google.firebase.ml.custom.model.FirebaseCloudModelSource
 
-
-val pokeArray: Array<String> = arrayOf("abra", "aerodactyl", "alakazam", "arbok", "arcanine", "articuno", "beedrill", "bellsprout",
-        "blastoise", "bulbasaur", "butterfree", "caterpie", "chansey", "charizard", "charmander", "charmeleon", "clefable", "clefairy", "cloyster", "cubone", "dewgong",
-        "diglett", "ditto", "dodrio", "doduo", "dragonair", "dragonite", "dratini", "drowzee", "dugtrio", "eevee", "ekans", "electabuzz",
-        "electrode", "exeggcute", "exeggutor", "farfetchd", "fearow", "flareon", "gastly", "gengar", "geodude", "gloom",
-        "golbat", "goldeen", "golduck", "golem", "graveler", "grimer", "growlithe", "gyarados", "haunter", "hitmonchan",
-        "hitmonlee", "horsea", "hypno", "ivysaur", "jigglypuff", "jolteon", "jynx", "kabuto",
-        "kabutops", "kadabra", "kakuna", "kangaskhan", "kingler", "koffing", "krabby", "lapras", "lickitung", "machamp",
-        "machoke", "machop", "magikarp", "magmar", "magnemite", "magneton", "mankey", "marowak", "meowth", "metapod",
-        "mew", "mewtwo", "moltres", "mrmime", "muk", "nidoking", "nidoqueen", "nidorina", "nidorino", "ninetales",
-        "oddish", "omanyte", "omastar", "onix", "paras", "parasect", "persian", "pidgeot", "pidgeotto", "pidgey",
-        "pikachu", "pinsir", "poliwag", "poliwhirl", "poliwrath", "ponyta", "porygon", "primeape", "psyduck", "raichu",
-        "rapidash", "raticate", "rattata", "rhydon", "rhyhorn", "sandshrew", "sandslash", "scyther", "seadra",
-        "seaking", "seel", "shellder", "slowbro", "slowpoke", "snorlax", "spearow", "squirtle", "starmie", "staryu",
-        "tangela", "tauros", "tentacool", "tentacruel", "vaporeon", "venomoth", "venonat", "venusaur", "victreebel",
-        "vileplume", "voltorb", "vulpix", "wartortle", "weedle", "weepinbell", "weezing", "wigglytuff", "zapdos", "zubat")
-
 class PokemonDetectorActivity : BaseCameraActivity() {
+    private val pokeArray: Array<String> = arrayOf("abra", "aerodactyl", "alakazam", "arbok", "arcanine", "articuno", "beedrill", "bellsprout",
+            "blastoise", "bulbasaur", "butterfree", "caterpie", "chansey", "charizard", "charmander", "charmeleon", "clefable", "clefairy", "cloyster", "cubone", "dewgong",
+            "diglett", "ditto", "dodrio", "doduo", "dragonair", "dragonite", "dratini", "drowzee", "dugtrio", "eevee", "ekans", "electabuzz",
+            "electrode", "exeggcute", "exeggutor", "farfetchd", "fearow", "flareon", "gastly", "gengar", "geodude", "gloom",
+            "golbat", "goldeen", "golduck", "golem", "graveler", "grimer", "growlithe", "gyarados", "haunter", "hitmonchan",
+            "hitmonlee", "horsea", "hypno", "ivysaur", "jigglypuff", "jolteon", "jynx", "kabuto",
+            "kabutops", "kadabra", "kakuna", "kangaskhan", "kingler", "koffing", "krabby", "lapras", "lickitung", "machamp",
+            "machoke", "machop", "magikarp", "magmar", "magnemite", "magneton", "mankey", "marowak", "meowth", "metapod",
+            "mew", "mewtwo", "moltres", "mrmime", "muk", "nidoking", "nidoqueen", "nidorina", "nidorino", "ninetales",
+            "oddish", "omanyte", "omastar", "onix", "paras", "parasect", "persian", "pidgeot", "pidgeotto", "pidgey",
+            "pikachu", "pinsir", "poliwag", "poliwhirl", "poliwrath", "ponyta", "porygon", "primeape", "psyduck", "raichu",
+            "rapidash", "raticate", "rattata", "rhydon", "rhyhorn", "sandshrew", "sandslash", "scyther", "seadra",
+            "seaking", "seel", "shellder", "slowbro", "slowpoke", "snorlax", "spearow", "squirtle", "starmie", "staryu",
+            "tangela", "tauros", "tentacool", "tentacruel", "vaporeon", "venomoth", "venonat", "venusaur", "victreebel",
+            "vileplume", "voltorb", "vulpix", "wartortle", "weedle", "weepinbell", "weezing", "wigglytuff", "zapdos", "zubat")
+
     companion object {
         /** Dimensions of inputs.  */
         const val DIM_IMG_SIZE_X = 224
@@ -50,7 +49,7 @@ class PokemonDetectorActivity : BaseCameraActivity() {
     private lateinit var fireBaseInterpreter: FirebaseModelInterpreter
     private lateinit var inputOutputOptions: FirebaseModelInputOutputOptions
 
-    lateinit var itemAdapter: PokemonAdapter
+    private lateinit var itemAdapter: PokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -104,7 +103,7 @@ class PokemonDetectorActivity : BaseCameraActivity() {
         }
     }
 
-    private fun convertBitmapToByteBuffer(bitmap: Bitmap?) : ByteBuffer{
+    private fun convertBitmapToByteBuffer(bitmap: Bitmap?): ByteBuffer {
         //Clear the Bytebuffer for a new image
         imgData.rewind()
         bitmap?.getPixels(intValues, 0, bitmap.width, 0, 0, bitmap.width, bitmap.height)

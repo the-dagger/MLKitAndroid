@@ -6,7 +6,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.github.the_dagger.mlkit.PojoApi
+import android.widget.Toast
+import io.github.the_dagger.mlkit.model.PojoApi
 import io.github.the_dagger.mlkit.R
 import io.github.the_dagger.mlkit.activity.*
 import kotlinx.android.synthetic.main.item_row_home.view.*

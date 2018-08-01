@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.github.the_dagger.mlkit.Pokemon
+import io.github.the_dagger.mlkit.model.Pokemon
 import io.github.the_dagger.mlkit.R
 import kotlinx.android.synthetic.main.item_row.view.*
 

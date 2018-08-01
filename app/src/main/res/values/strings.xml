@@ -2,12 +2,12 @@
     <string name="app_name">MlKit</string>
     <string name="detected_items">Detected Items</string>
     <string name="desc_text">A simple credit card scanner that reads the card number and expiry date</string>
-    <string name="desc_face">Detect faces and facial landmarks</string>
+    <string name="desc_face">Load and run a custom TensorflowLite model</string>
     <string name="desc_barcode">A simple QR code scanner</string>
     <string name="desc_labelling">Google Lens clone using MLKit</string>
     <string name="desc_landmark">Identify popular landmarks in an image</string>
     <string name="title_text">Text recognition</string>
-    <string name="title_face">Face detection</string>
+    <string name="model_custom">Custom Model</string>
     <string name="title_barcode">Barcode scanning</string>
     <string name="title_labelling">Image labeling</string>
     <string name="title_landmark">Landmark recognition</string>
