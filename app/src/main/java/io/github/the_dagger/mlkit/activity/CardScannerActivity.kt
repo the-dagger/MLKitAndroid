@@ -11,8 +11,6 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImage
 import io.github.the_dagger.mlkit.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.layout_card_scanner.*
-import com.google.firebase.ml.vision.cloud.text.FirebaseVisionCloudText
-
 
 
 class CardScannerActivity : BaseCameraActivity() {
@@ -36,11 +34,11 @@ class CardScannerActivity : BaseCameraActivity() {
 
     private fun getCardDetailsFromCloud(bitmap: Bitmap) {
         val image = FirebaseVisionImage.fromBitmap(bitmap)
-        val firebaseVisionTextDetector = FirebaseVision.getInstance().visionCloudTextDetector
+        val firebaseVisionTextDetector = FirebaseVision.getInstance().cloudTextRecognizer
 
-        firebaseVisionTextDetector.detectInImage(image)
+        firebaseVisionTextDetector.processImage(image)
                 .addOnSuccessListener {
-                    Log.e("TAG",it.text)
+                    Log.e("TAG", it.text)
                     val words = it.text.split("\n")
                     for (word in words) {
                         Log.e("TAG", word)

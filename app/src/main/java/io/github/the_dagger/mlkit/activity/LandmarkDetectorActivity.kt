@@ -73,7 +73,6 @@ class LandmarkDetectorActivity : BaseCameraActivity() {
                 override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
                     //Some error handling since no image was picked
                 }
-
             })
         }
     }

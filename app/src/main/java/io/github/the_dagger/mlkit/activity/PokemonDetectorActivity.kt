@@ -60,7 +60,7 @@ class PokemonDetectorActivity : BaseCameraActivity() {
 
         rvLabel.layoutManager = LinearLayoutManager(this)
 
-//        Load a cloud model using the FirebaseCloudModelSource Builder class
+        //Load a cloud model using the FirebaseCloudModelSource Builder class
         val cloudSource = FirebaseCloudModelSource.Builder("pokedex")
                 .enableModelUpdates(true)
                 .build()
@@ -83,6 +83,7 @@ class PokemonDetectorActivity : BaseCameraActivity() {
 
         fireBaseInterpreter = FirebaseModelInterpreter.getInstance(firebaseModelOptions)!!
 
+        //Input and Output options for the model
         inputOutputOptions = FirebaseModelInputOutputOptions.Builder()
                 .setInputFormat(0, FirebaseModelDataType.FLOAT32, intArrayOf(1, 224, 224, 3))
                 .setOutputFormat(0, FirebaseModelDataType.FLOAT32, intArrayOf(1, 149))
@@ -121,10 +122,12 @@ class PokemonDetectorActivity : BaseCameraActivity() {
     }
 
     private fun getPokemonFromBitmap(bitmap: Bitmap?) {
+        //Creating a FirebaseModelInput object that takes in the ByteBuffer as an input
         val inputs = FirebaseModelInputs.Builder()
-                .add(convertBitmapToByteBuffer(bitmap)) // add() as many input arrays as your model requires
+                .add(convertBitmapToByteBuffer(bitmap))
                 .build()
 
+        //Provide the firebaseModelInput to the FirebaseInterpreter
         fireBaseInterpreter.run(inputs, inputOutputOptions)
                 ?.addOnSuccessListener {
                     val pokeList = mutableListOf<Pokemon>()

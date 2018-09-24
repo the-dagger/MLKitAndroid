@@ -14,7 +14,7 @@ class PokemonAdapter(private val pokeList: List<Pokemon>) : RecyclerView.Adapter
 
     private lateinit var context: Context
 
-    class PokeHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+    class PokeHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokeHolder {
         context = parent.context

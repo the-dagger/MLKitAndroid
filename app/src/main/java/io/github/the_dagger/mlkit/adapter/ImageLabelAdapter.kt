@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.item_row.view.*
 class ImageLabelAdapter(private val firebaseVisionList: List<Any>, private val isCloud: Boolean) : RecyclerView.Adapter<ImageLabelAdapter.ItemHolder>() {
     lateinit var context: Context
 
-    inner class ItemHolder(itemView: View?) : RecyclerView.ViewHolder(itemView) {
+    inner class ItemHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bindCloud(currentItem: FirebaseVisionCloudLabel) {
             when {

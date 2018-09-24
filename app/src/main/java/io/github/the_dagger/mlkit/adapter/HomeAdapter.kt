@@ -16,7 +16,7 @@ class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<Hom
 
     private lateinit var context: Context
 
-    class HomeHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)
+    class HomeHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onBindViewHolder(holder: HomeHolder, position: Int) {
         val currItem = apiList[position]
@@ -30,7 +30,7 @@ class HomeAdapter(private val apiList: List<PojoApi>) : RecyclerView.Adapter<Hom
                     1 -> context.startActivity(Intent(context, CardScannerActivity::class.java))
                     2 -> context.startActivity(Intent(context, BarCodeReaderActivity::class.java))
                     3 -> context.startActivity(Intent(context, LandmarkDetectorActivity::class.java))
-                    4 -> context.startActivity(Intent(context, PokemonDetectorActivity::class.java))
+                    4 -> context.startActivity(Intent(context, FaceDetectionActivity::class.java))
                 }
             }
         }

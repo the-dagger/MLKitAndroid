@@ -15,4 +15,5 @@
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
     <string name="accuracy">Accuracy</string>
+    <string name="title_face">Face Detection</string>
 </resources>
