@@ -54,11 +54,12 @@ class CardScannerActivity : BaseCameraActivity() {
                         }
                     }
                     sheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-                    fabProgressCircle.hide()
                 }
                 .addOnFailureListener {
-                    fabProgressCircle.hide()
                     Toast.makeText(baseContext, "Sorry, something went wrong!", Toast.LENGTH_SHORT).show()
+                }
+                .addOnCompleteListener {
+                    fabProgressCircle.hide()
                 }
     }
 }
